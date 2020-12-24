@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Birds!{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for bird in birds %}
+    <article class="post">
+      <header>
+        <div>
+          <h1><a href="{{ url_for('blog.update', id=bird['id']) }}"></ahref>{{ bird['common_name'] }}</a></h1>
+          <div class="about"> 
+            <a href={{ bird['info_url'] }} > Bird Facts </a></br>
+            <a href="{{ url_for('blog.sighting', id=bird['id']) }}"></ahref>Log a sighting!</a></div>
+          </div>
+        </div>
+      </header>
+      
+      <b>Seen this week? </b>
+      {% if bird['week'] == this_week %}
+      <b>✔️</b></br>
+      {% else %}
+      <b>❓</b></br>
+      {%endif%}
+
+      {% if bird['picture_url'] is defined %}
+        <img src="{{ bird['picture_url'] }}" alt="{{ bird['picture_url'] }}" style="width:200;height:1000;">
+      {%endif%}
+
+    </article>
+      <hr>
+  {% endfor %}
+
+
+{% endblock %}

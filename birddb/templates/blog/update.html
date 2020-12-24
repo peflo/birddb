@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Change This Bird!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <form method="post">
+    <label for="common_name">Common Name</label>
+    <input name="common_name" id="common_name" 
+      value="{{ request.form['name'] or bird['common_name']}}" required>
+    <label for="info_url">Information link</label>
+    <input name="info_url" id="info_url" 
+      value="{{ request.form['info_url'] or bird['info_url'] }} " >
+    <label for="picture_url">Picture Link</label>
+    <input name="picture_url" id="picture_url" 
+     value="{{ request.form['picture_url'] or bird['info_url'] }} " >
+    
+    <input type="submit" value="Save">
+  </form>
+  <form action="{{ url_for('blog.delete', id=bird['id']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+
+  <h1>Sighting History</h1>
+  {% for sighting in sightings %}
+  <article class="post">
+    <header>
+      <div>
+        <div class="about"> 
+          {{ sighting['log_time'] }} {{sighting['username']}} 
+        </div>
+        <div class="body">{{ sighting['notes']}}</div>
+      </div>
+    </header>
+
+
+  </article>
+  {% if not loop.last %}
+    <hr>
+  {% endif %}
+{% endfor %}
+
+{% endblock %}

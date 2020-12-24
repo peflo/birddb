@@ -1,0 +1,4 @@
+include birddb/schema.sql
+graft birddb/static
+graft birddb/templates
+global-exclude *.pyc

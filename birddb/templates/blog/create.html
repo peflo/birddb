@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Bird!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="common_name">Common Name</label>
+    <input name="common_name" id="common_name" value="{{ request.form['name'] }}" required>
+    <label for="info_url">Information link</label>
+    <input name="info_url" id="info_url" value="{{ request.form['info_url'] }}" >
+    <label for="picture_url">Picture Link</label>
+    <input name="picture_url" id="picture_url" value="{{ request.form['picture_url'] }}" >
+    
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Noice!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div><h1>"Good job, you saw a {{bird['common_name']}}!"</h1></div>
+  <form method="post">
+    <label for="notes"> Any notes to add?</label>
+    <textarea name="notes" id="notes">
+        {{ request.form['notes'] }}
+    </textarea> 
+    
+    <input type="submit" value="Save">
+  </form>
+
+{% endblock %}
