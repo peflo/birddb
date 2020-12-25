@@ -14,22 +14,29 @@
         <div>
           <h1><a href="{{ url_for('blog.update', id=bird['id']) }}"></ahref>{{ bird['common_name'] }}</a></h1>
           <div class="about"> 
+            Seen this week? 
+            {% if bird['week'] == this_week %}
+            <b>✔️</b></br>
+            {% else %}
+            <b>❓</b></br>
+            {%endif%}
             <a href={{ bird['info_url'] }} > Bird Facts </a></br>
-            <a href="{{ url_for('blog.sighting', id=bird['id']) }}"></ahref>Log a sighting!</a></div>
+          </div>
+          <div class="right">
+            {% if bird['picture_url'] is defined and bird['picture_url'] %}
+            {% set picture_url = bird['picture_url'] %}
+           {% else %}
+             {%  set picture_url =  "http://clipart-library.com/images/kTMK4Gkbc.png" %}
+           {% endif %}
+           <a href="{{ url_for('blog.sighting', id=bird['id']) }}"><img src="{{picture_url}}" alt="Bird Picture" width=200 height=auto  ></a>
           </div>
         </div>
       </header>
       
-      <b>Seen this week? </b>
-      {% if bird['week'] == this_week %}
-      <b>✔️</b></br>
-      {% else %}
-      <b>❓</b></br>
-      {%endif%}
 
-      {% if bird['picture_url'] is defined %}
-        <img src="{{ bird['picture_url'] }}" alt="{{ bird['picture_url'] }}" style="width:200;height:1000;">
-      {%endif%}
+
+
+
 
     </article>
       <hr>
